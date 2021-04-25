@@ -50,8 +50,8 @@ EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.webzone.dev' 
 EMAIL_USE_TLS = True 
 EMAIL_PORT = 465 
-EMAIL_HOST_USER = 'zaidbaalbaki@webzone.dev' 
-EMAIL_HOST_PASSWORD = 'zazooxoo12'
+EMAIL_HOST_USER = 'test@webzone.dev' 
+EMAIL_HOST_PASSWORD = 'Testtset123'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
