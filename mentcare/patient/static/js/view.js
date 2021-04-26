@@ -1,4 +1,4 @@
-$(document).ready(ready_form(),getHospital(),get_list());
+$(document).ready(ready_form(),getClinic(),get_list());
 
 function get_list(){  
   $.ajax({
@@ -40,22 +40,22 @@ var days=2;  // max days ahead booking
   document.getElementById('book_date').max=max_date;
 }
 
-// get hospital list
+// get Clinic list
 
-function getHospital(){
+function getClinic(){
     document.getElementById('load1').style.display='flex';
     $.ajax({
-        url: `/listHospital/`,
+        url: `/listClinic/`,
         type:   'GET',
         success: function(data){
             document.getElementById('load1').style.display='none';
-           var hospital_ele=document.getElementById('hospital-list') ;
+           var Clinic_ele=document.getElementById('Clinic-list') ;
            var i;
            for(i=0;i<data.length;i++){
             var option = document.createElement("option");
-            option.text = data[i].name +', '+data[i].city+', '+data[i].country;
+            option.text = data[i].name;
             option.value = data[i].id;
-            hospital_ele.add(option);
+            Clinic_ele.add(option);
            }
          },
         error: function() {
@@ -66,7 +66,7 @@ function getHospital(){
     }
 
 function getDoctorList(){
-  var hos_id=document.getElementById('hospital-list').value;
+  var hos_id=document.getElementById('Clinic-list').value;
   if (hos_id){
   document.getElementById('load1').style.display='flex';
     $.ajax({
@@ -257,7 +257,7 @@ function feedData(id,tableData) {
   tableContent += `<thead>
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Hospital</th>
+        <th scope="col">Clinic</th>
         <th scope="col">Time Alloted</th>
         <th scope="col">Date</th>
       </tr>
@@ -265,7 +265,7 @@ function feedData(id,tableData) {
     $.each(tableData, function () {
       tableContent += '<tr>';
       tableContent += `<td> Dr. &nbsp; ${this.doctor_name},&nbsp;${this.doctor_qualification},&nbsp;${this.doctor_speciality}</td>`;
-      tableContent += `<td > ${this.hospital_name} </td>`;
+      tableContent += `<td > ${this.Clinic_name} </td>`;
       tableContent += `<td > ${this.time_alloted} </td>`;
       tableContent += `<td > ${this.date} </td>`;
       tableContent += '</tr>';

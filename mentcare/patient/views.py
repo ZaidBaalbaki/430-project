@@ -108,7 +108,7 @@ def getwatingappointments(request,id):
             item['doctor_qualification']=doc_obj.get('qualification')
             item['doctor_speciality']=doc_obj.get('speciality')
             item['Clinic_name']=hos_obj.get('name')
-            item['webexusername']=doc_obj.get('webexusername')
+            
     return JsonResponse(obj,safe=False)
 
 def get_list(request,id):

@@ -4,7 +4,7 @@
 <script src="{% static '/js/view.js' %}"></script>
 <script src="{% static '/js/select2.min.js' %}"></script>
 <script>
-    $("#hospital-list").select2( {
+    $("#Clinic-list").select2( {
         placeholder: "Select Clinic",
         allowClear: true
         } );
@@ -201,7 +201,7 @@
                                                                 <label class="control-label col-lg-4 justify-content-start" for="name">
                                                                   Clinics:</label>
                                                                 <div class="col-lg-12">
-                                                                    <select id="hospital-list" onchange="getDoctorList(); return false;" class="form-control">
+                                                                    <select id="Clinic-list" onchange="getDoctorList(); return false;" class="form-control">
                                                                         <option value="">Select Clinic</option>
                                                                     
                                                                         
