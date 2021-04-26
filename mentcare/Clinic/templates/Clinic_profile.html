@@ -178,7 +178,7 @@
                             <div class="row mb-2 m-0 p-0 gallery_pack">
                                 
                                 <div class="col-sm-12 p-2">
-                                    <a href="/editHospital/{{profile.0.id}}" class="btn btn-md btn-primary btn-block">Edit Profile</a>
+                                    <a href="/editClinic/{{profile.0.id}}" class="btn btn-md btn-primary btn-block">Edit Profile</a>
                                 </div>
                                 <div class="mb-2 col-sm-12 p-2">
                                   <a href="/changePassword/{{profile.0.id}}" class="btn btn-md btn-primary btn-block">Change Password</a>
@@ -307,14 +307,14 @@
                                                             <div class="col-lg-6">
                                                               <div class="row">
                                                                 <div class="form-group col-lg-12 mb-3">
-                                                                  <label class="control-label col-lg-4 justify-content-start" for="hospital_name">
+                                                                  <label class="control-label col-lg-4 justify-content-start" for="Clinic_name">
                                                                     Name:</label>
                                                                   <div class="col-lg-8">
                                                                     <input type="text" class="form-control w-100" id="name" name="name"
                                                                       minlength="3" maxlength="50" placeholder="Enter Doctor's Name" required>
                                                                   </div>
                                                                 </div>
-                                                                <input type="hidden" name="hospital_id" id="hospital_id" value="{{profile.0.id}}">
+                                                                <input type="hidden" name="Clinic_id" id="Clinic_id" value="{{profile.0.id}}">
                                                                 <input type="hidden" value="" name="link" id="link">
                                                                 <div class="form-group col-lg-12 mb-3">
                                                                   <label class="control-label col-lg-4 justify-content-start">Email:</label>
@@ -341,7 +341,7 @@
                                                                   <label class="control-label col-lg-4 justify-content-start" for="speciality_tag">Qualification:</label>
                                                                   <div class="col-lg-8">
                                                                     <input type="text" class="form-control w-100" id="qualification" name="qualification"
-                                                                    minlength="3" maxlength="100" placeholder="Add Speciality" required>
+                                                                    minlength="3" maxlength="100" placeholder="Enter Qualification" required>
                                                                   </div>
                                                                 </div>
                                                                
@@ -349,9 +349,16 @@
                                                                     <label class="control-label col-lg-4 justify-content-start" for="speciality_tag">Speciality:</label>
                                                                     <div class="col-lg-8">
                                                                       <input type="text" class="form-control w-100" id="speciality" name="speciality"
-                                                                      minlength="3" maxlength="100" placeholder="Add Speciality" required>
+                                                                      minlength="3" maxlength="100" placeholder="Enter Speciality" required>
                                                                     </div>
                                                                   </div>
+                                                                 <div class="form-group col-lg-12 mb-3">
+                                                                  <label class="control-label col-lg-4 justify-content-start" for="webex">Webex Username:</label>
+                                                                  <div class="col-lg-8">
+                                                                    <input type="text" class="form-control w-100" id="webex" name="webex"
+                                                                    minlength="3" maxlength="100" placeholder="Enter Webex Username" required>
+                                                                  </div>
+                                                                </div>
                                                                   
                                                                   <div class="form-group col-lg-12 mb-2">
                                                                     <label class="control-label col-lg-4 justify-content-start"
@@ -424,7 +431,7 @@
                                                               <div class="col-lg-6">
                                                                 <div class="row">
                                                                   <div class="form-group col-lg-12 mb-3">
-                                                                    <label class="control-label col-lg-4 justify-content-start" for="hospital_name">
+                                                                    <label class="control-label col-lg-4 justify-content-start" for="Clinic_name">
                                                                       Name:</label>
                                                                     <div class="col-lg-8">
                                                                       <input type="text" class="form-control w-100" id="name-edit" name="name-edit"
@@ -439,6 +446,7 @@
                                                                         maxlength="100" placeholder="Enter Email-Id" required>
                                                                     </div>
                                                                   </div>
+                                                                  
                                                                   <div class="form-group col-lg-12 mb-3">
                                                                       <label class="control-label col-lg-4 justify-content-start" for="hos_phone">Phone:</label>
                                                                       <div class="col-lg-8">
