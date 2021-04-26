@@ -718,7 +718,7 @@ function remove_date(id) {
 
 var $holidayForm = $('#holidays_add');
 $holidayForm.on('submit', function(ev){
-var id=document.getElementById('hospital_id').value;
+var id=document.getElementById('Clinic_id').value;
     ev.preventDefault();
     document.getElementById('load1').style.display='flex';
     $.ajax({
