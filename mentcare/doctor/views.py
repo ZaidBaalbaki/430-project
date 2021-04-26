@@ -46,7 +46,7 @@ def add_doctor(request):
         to_time=request.POST.getlist('to_time[]')
         qualification=request.POST.get('qualification')
         speciality=request.POST.get('speciality')
-	webex = request.POST.get('webex')
+        webex = request.POST.get('webex')
         base_link=request.POST.get('link')
         doc_filter=CustomUser.objects.filter(email=email)
         if not doc_filter:
