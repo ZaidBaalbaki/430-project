@@ -5,7 +5,7 @@ from django.contrib import messages
 from user.models import CustomUser
 from .models import Patient_Profile
 from doctor.models import appointments,Doctor_profile
-from hospital.models import Hospital_profile
+from Clinic.models import Clinic_profile
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash,logout
 import uuid
@@ -103,11 +103,11 @@ def getwatingappointments(request,id):
         
         for item in obj:
             doc_obj=list(Doctor_profile.objects.filter(id=item.get('doctor_id')).values())[0]
-            hos_obj=list(Hospital_profile.objects.filter(id=doc_obj.get('hospital_id')).values())[0]
+            hos_obj=list(Clinic_profile.objects.filter(id=doc_obj.get('Clinic_id')).values())[0]
             item['doctor_name']=doc_obj.get('name')
             item['doctor_qualification']=doc_obj.get('qualification')
             item['doctor_speciality']=doc_obj.get('speciality')
-            item['hospital_name']=hos_obj.get('name')
+            item['Clinic_name']=hos_obj.get('name')
     return JsonResponse(obj,safe=False)
 
 def get_list(request,id):
