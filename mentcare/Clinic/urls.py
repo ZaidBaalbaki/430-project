@@ -5,7 +5,7 @@ from user.views import logout
 urlpatterns = [
     path('editClinic/<uuid:id>/', views.Clinic_edit),
     path('changePassword/<uuid:id>/', views.changePassword),
-    path('clinic/<uuid:id>/', views.Clinic_profile),
+    path('Clinic/<uuid:id>/', views.Clinic_profile),
     path('waitingApp/<uuid:hos_id>/', views.waiting_app),
     path('count/<uuid:hos_id>/', views.count),
     path('listClinic/',views.listClinic),
