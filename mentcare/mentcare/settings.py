@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'website',
     'crispy_forms',
     'doctor',
-    'hospital',
+    'Clinic',
     'patient',
     'user'
 ]
