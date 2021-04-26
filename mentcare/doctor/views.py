@@ -7,7 +7,7 @@ import uuid
 from .models import Doctor_profile,time_slots,appointments
 import datetime,time,os,json
 from user.models import CustomUser
-from hospital.models import Hospital_profile,Holidays,Weekends
+from Clinic.models import Clinic_profile,Holidays,Weekends
 from patient.models import Patient_Profile
 from django.template import loader
 from smtplib import SMTPException
@@ -16,7 +16,7 @@ from django.core.mail import EmailMessage
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash,logout
 
-mail_send_from="django_appointments@deligence.com"
+mail_send_from="clinicmail@gmail.com"
 BASE_DIR=os.path.dirname(os.path.abspath(__file__))
 json_dir=os.path.join(BASE_DIR,"data.json")
 
@@ -29,7 +29,7 @@ def role_test(user):
         return False
 
 def role_test1(user):
-    if user.role == "Hospital":
+    if user.role == "Clinic":
         return True
     else:
         return False
@@ -38,7 +38,7 @@ def role_test1(user):
 @user_passes_test(role_test1,login_url='/login/')
 def add_doctor(request):
     if request.is_ajax():
-        hospital_id=request.POST.get('hospital_id')
+        Clinic_id=request.POST.get('Clinic_id')
         name=request.POST.get('name')
         email=request.POST.get('email')
         phone=request.POST.get('phone')
@@ -49,13 +49,13 @@ def add_doctor(request):
         base_link=request.POST.get('link')
         doc_filter=CustomUser.objects.filter(email=email)
         if not doc_filter:
-            hospital_name=list(Hospital_profile.objects.filter(id=hospital_id).values('name'))[0].get('name')
+            Clinic_name=list(Clinic_profile.objects.filter(id=Clinic_id).values('name'))[0].get('name')
             id=uuid.uuid4()
             password = CustomUser.objects.make_random_password()
             obj=CustomUser.objects.create(id=id,email=email,role='Doctor',is_active=True,is_superuser=False,is_staff=False)
             obj.set_password(password)
             obj.save()
-            doc_object=Doctor_profile.objects.create(id=id,name=name,email=email,phone=phone,qualification=qualification,speciality=speciality,hospital_id=hospital_id)
+            doc_object=Doctor_profile.objects.create(id=id,name=name,email=email,phone=phone,qualification=qualification,speciality=speciality,Clinic_id=Clinic_id)
             doc_object.save()
             for i in range(len(from_time)):
                 slot_obj=time_slots.objects.create(doctor_id=id,from_time=from_time[i],to_time=to_time[i])
@@ -66,7 +66,7 @@ def add_doctor(request):
                     'login':email,
                     'password':password,
                     'link':link,
-                    'hospital_name':hospital_name,
+                    'Clinic_name':Clinic_name,
                     
                 })
             subject='Django Appointment System Login Details'
@@ -92,9 +92,9 @@ def listDoctor(request,hos_id):
         else:
             doc_obj=Doctor_profile.objects.all()
         if search:
-            doc_list=list(doc_obj.filter(hospital_id=hos_id,name__icontains=search).values('id','name','speciality','qualification','is_available'))
+            doc_list=list(doc_obj.filter(Clinic_id=hos_id,name__icontains=search).values('id','name','speciality','qualification','is_available'))
         else:
-            doc_list=list(doc_obj.filter(hospital_id=hos_id).values('id','name','speciality','qualification','is_available'))
+            doc_list=list(doc_obj.filter(Clinic_id=hos_id).values('id','name','speciality','qualification','is_available'))
         return JsonResponse(doc_list,safe=False)
 
 @login_required(login_url='/login/')
@@ -170,7 +170,7 @@ def addAppointment(request):
             pt_id=request.POST.get('pt_id')
             book_date=request.POST.get('book_date')
             doc_obj=Doctor_profile.objects.get(id=doc_id)
-            hos_id=doc_obj.hospital_id
+            hos_id=doc_obj.Clinic_id
             weekend_obj=list(Weekends.objects.filter(hos_id=hos_id).values('weekday'))
             book_day = datetime.datetime.strptime(book_date, '%Y-%m-%d').date().strftime('%A')
             check_obj=appointments.objects.filter(patient_id=pt_id,doctor_id=doc_id,date=book_date)
@@ -258,8 +258,8 @@ def addAppointment(request):
 @user_passes_test(role_test,login_url='/login/')
 def doctor_profile(request,id):
     profile=list(Doctor_profile.objects.filter(id=id).values())
-    hospital_name=list(Hospital_profile.objects.filter(id=profile[0].get('hospital_id')).values())
-    return render(request,'doctor_profile.html',{'profile':profile,'hospital_name':hospital_name,'title':"Profile"})
+    Clinic_name=list(Clinic_profile.objects.filter(id=profile[0].get('Clinic_id')).values())
+    return render(request,'doctor_profile.html',{'profile':profile,'Clinic_name':Clinic_name,'title':"Profile"})
 
 
 

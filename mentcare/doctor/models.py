@@ -9,7 +9,7 @@ class Doctor_profile(models.Model):
      phone=models.CharField(max_length=100)
      qualification= models.CharField(max_length=100)
      speciality= models.CharField(max_length=200)
-     hospital_id=models.CharField(max_length=100)
+     Clinic_id=models.CharField(max_length=100)
      is_available=models.BooleanField(default=True)
 
      class Meta:
