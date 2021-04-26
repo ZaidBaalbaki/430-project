@@ -2,42 +2,24 @@ from django.db import models
 
 # Create your models here.
 
-class Doctor_profile(models.Model):
+class Clinic_profile(models.Model):
      id=models.UUIDField( primary_key = True, editable = False)
      name=models.CharField(max_length=100)
      email=models.CharField(max_length=100)
      phone=models.CharField(max_length=100)
-     qualification= models.CharField(max_length=100)
-     speciality= models.CharField(max_length=200)
-     Clinic_id=models.CharField(max_length=100)
-     is_available=models.BooleanField(default=True)
-     webexusername=models.CharField(max_length=100)
+
      class Meta:
-         db_table='Doctor'
+         db_table='Clinic'
 
 
-class time_slots(models.Model):
-    doctor_id=models.CharField(max_length=100)
-    from_time=models.CharField(max_length=10)
-    to_time=models.CharField(max_length=10)
-
-    class Meta:
-        db_table='time_slots'
-
-class appointments(models.Model):
-    appointment_id=models.UUIDField(primary_key=True)
-    patient_id=models.CharField(max_length=100)
-    doctor_id=models.CharField(max_length=100)
+class Holidays(models.Model):
     date=models.CharField(max_length=50)
-    time_alloted=models.CharField(max_length=50)
-    number_alloted=models.CharField(max_length=50)
-    is_completed=models.BooleanField(default=False)
-    is_confirmed=models.BooleanField(default=False)
-    is_rejected=models.BooleanField(default=False)
-    is_disabled=models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    updated_at=models.DateTimeField(auto_now=True)
-    prescriptionform=models.FileField(blank=True)
+    hos_id=models.CharField(max_length=70)
     class Meta:
-        ordering = ['created_at']
-        get_latest_by='created_at'
+        db_table='Holidays'
+
+class Weekends(models.Model):
+    weekday=models.CharField(max_length=50)
+    hos_id=models.CharField(max_length=70)
+    class Meta:
+        db_table='Weekends'
