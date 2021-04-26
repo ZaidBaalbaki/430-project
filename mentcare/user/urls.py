@@ -11,7 +11,7 @@ urlpatterns = [
     path('check_username/',views.check_username),
     path('confirmAccount/<uuid:id>',views.confirmAccount),
     path('download/<path:path>',views.download),
-    path('',include('hospital.urls')),
+    path('',include('Clinic.urls')),
     path('',include('doctor.urls')),
     path('',include('patient.urls')),
 ]

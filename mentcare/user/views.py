@@ -32,7 +32,7 @@ from django.contrib.auth.views import PasswordContextMixin
 import re
 import mimetypes
 from mentcare import settings
-mail_send_from="django_appointments@deligence.com"
+mail_send_from="clinicmail@gmail.com"
 
 UserModel = get_user_model()
 INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
@@ -52,9 +52,9 @@ def manage(request):
                     if obj.role == 'Patient':
                         login(request, user)
                         return redirect(f'/patient/{obj.id}/')
-                    if obj.role == 'Hospital':
+                    if obj.role == 'Clinic':
                         login(request, user)
-                        return redirect(f'/hospital/{obj.id}/')
+                        return redirect(f'/Clinic/{obj.id}/')
                     if obj.role == 'Doctor':
                         login(request, user)
                         return redirect(f'/doctor/{obj.id}/')
@@ -137,7 +137,7 @@ def password_reset(request):
     form = PasswordResetForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            form.save(from_email='django_appointments@appointments.com',request=request)
+            form.save(from_email='clinicmail@gmail.com',request=request)
             messages.success(request, "link sent")
             return redirect('/login/')
         else:
