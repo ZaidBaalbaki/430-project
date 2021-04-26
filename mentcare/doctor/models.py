@@ -11,7 +11,7 @@ class Doctor_profile(models.Model):
      speciality= models.CharField(max_length=200)
      Clinic_id=models.CharField(max_length=100)
      is_available=models.BooleanField(default=True)
-
+     webexusername=models.CharField(max_length=100)
      class Meta:
          db_table='Doctor'
 
@@ -37,7 +37,7 @@ class appointments(models.Model):
     is_disabled=models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at=models.DateTimeField(auto_now=True)
-
+    prescriptionform=models.FileField(blank=True)
     class Meta:
         ordering = ['created_at']
         get_latest_by='created_at'
