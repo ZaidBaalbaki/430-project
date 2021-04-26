@@ -46,6 +46,7 @@ def add_doctor(request):
         to_time=request.POST.getlist('to_time[]')
         qualification=request.POST.get('qualification')
         speciality=request.POST.get('speciality')
+	webex = request.POST.get('webex')
         base_link=request.POST.get('link')
         doc_filter=CustomUser.objects.filter(email=email)
         if not doc_filter:
@@ -55,7 +56,7 @@ def add_doctor(request):
             obj=CustomUser.objects.create(id=id,email=email,role='Doctor',is_active=True,is_superuser=False,is_staff=False)
             obj.set_password(password)
             obj.save()
-            doc_object=Doctor_profile.objects.create(id=id,name=name,email=email,phone=phone,qualification=qualification,speciality=speciality,Clinic_id=Clinic_id)
+            doc_object=Doctor_profile.objects.create(id=id,name=name,email=email,phone=phone,qualification=qualification,speciality=speciality,Clinic_id=Clinic_id,webexusername=webex)
             doc_object.save()
             for i in range(len(from_time)):
                 slot_obj=time_slots.objects.create(doctor_id=id,from_time=from_time[i],to_time=to_time[i])
@@ -92,9 +93,9 @@ def listDoctor(request,hos_id):
         else:
             doc_obj=Doctor_profile.objects.all()
         if search:
-            doc_list=list(doc_obj.filter(Clinic_id=hos_id,name__icontains=search).values('id','name','speciality','qualification','is_available'))
+            doc_list=list(doc_obj.filter(Clinic_id=hos_id,name__icontains=search).values('id','name','speciality','qualification','webexusername','is_available'))
         else:
-            doc_list=list(doc_obj.filter(Clinic_id=hos_id).values('id','name','speciality','qualification','is_available'))
+            doc_list=list(doc_obj.filter(Clinic_id=hos_id).values('id','name','speciality','qualification','webexusername','is_available'))
         return JsonResponse(doc_list,safe=False)
 
 @login_required(login_url='/login/')
@@ -103,7 +104,7 @@ def editDoctor(request,id):
     if request.is_ajax:
         if request.method == 'GET':
             data=[]
-            doc_obj=Doctor_profile.objects.filter(id=id).values('id','name','email','phone','qualification','speciality')
+            doc_obj=Doctor_profile.objects.filter(id=id).values('id','name','email','phone','qualification','webexusername','speciality')
             if doc_obj:
                 time_slots_obj=list(time_slots.objects.filter(doctor_id=id).values('from_time','to_time'))
                 data=list(doc_obj)+time_slots_obj
@@ -112,6 +113,7 @@ def editDoctor(request,id):
             name=request.POST.get('name-edit')
             email=request.POST.get('email-edit')
             phone=request.POST.get('phone-edit')
+            webex=request.POST.get('webex')
             from_time=request.POST.getlist('from_time[]')
             to_time=request.POST.getlist('to_time[]')
             qualification=request.POST.get('qualification-edit')
@@ -124,6 +126,7 @@ def editDoctor(request,id):
             doc_obj.to_time=to_time
             doc_obj.qualification=qualification
             doc_obj.speciality=speciality
+            doc_obj.webexuername=webex
             doc_obj.save()
             time_slots_obj=time_slots.objects.filter(doctor_id=id).delete()
             for i in range(len(from_time)):
