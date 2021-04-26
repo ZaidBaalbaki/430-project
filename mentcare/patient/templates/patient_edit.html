@@ -133,12 +133,12 @@
                       <div class="form-group col-lg-12 mb-3">
                             <label for="facilities" class="control-label col-lg-4 justify-content-start">Attach Document:</label>
                             <div class="col-lg-8">
-                              <input type="file" id="myFile" class="form-control w-100" id="File" name="filename" required>
-                              {{profile_add.0.upload}}
+                              <input type="file" id="myFile" class="form-control w-100" id="File" name="filename" >
+                              <a href="/download/{{profile_add.0.upload}}"> {{profile_add.0.upload}}</a>
                               
                               
                             </div>
-                            <a href="/download/{{profile_add.0.upload}}"></a>
+                           
                           </div>
                       </div>
                     </div>
