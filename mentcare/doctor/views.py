@@ -7,7 +7,7 @@ import uuid
 from .models import Doctor_profile,time_slots,appointments
 import datetime,time,os,json
 from user.models import CustomUser
-from Clinic.models import Clinic_profile,Holidays,Weekends
+from Clinic.models import clinicprofile,Holidays,Weekends
 from patient.models import Patient_Profile
 from django.template import loader
 from smtplib import SMTPException
@@ -49,7 +49,7 @@ def add_doctor(request):
         base_link=request.POST.get('link')
         doc_filter=CustomUser.objects.filter(email=email)
         if not doc_filter:
-            Clinic_name=list(Clinic_profile.objects.filter(id=Clinic_id).values('name'))[0].get('name')
+            Clinic_name=list(clinicprofile.objects.filter(id=Clinic_id).values('name'))[0].get('name')
             id=uuid.uuid4()
             password = CustomUser.objects.make_random_password()
             obj=CustomUser.objects.create(id=id,email=email,role='Doctor',is_active=True,is_superuser=False,is_staff=False)
@@ -258,7 +258,7 @@ def addAppointment(request):
 @user_passes_test(role_test,login_url='/login/')
 def doctor_profile(request,id):
     profile=list(Doctor_profile.objects.filter(id=id).values())
-    Clinic_name=list(Clinic_profile.objects.filter(id=profile[0].get('Clinic_id')).values())
+    Clinic_name=list(clinicprofile.objects.filter(id=profile[0].get('Clinic_id')).values())
     return render(request,'doctor_profile.html',{'profile':profile,'Clinic_name':Clinic_name,'title':"Profile"})
 
 
