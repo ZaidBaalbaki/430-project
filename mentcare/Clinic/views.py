@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.http import HttpResponse,JsonResponse
-from .models import Clinic_profile,Holidays,Weekends
+from .models import clinicprofile,Holidays,Weekends
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash,logout
@@ -28,30 +28,30 @@ def role_test(user):
 @login_required(login_url='/login/')
 @user_passes_test(role_test,login_url='/login/')
 def Clinic_profile(request,id):
-    profile=Clinicprofile.objects.filter(id=id)
+    profile=clinicprofile.objects.filter(id=id)
     if not profile:
         return redirect(f'/editClinic/{id}/')
     else:
-        profile=list(Clinic_profile.objects.filter(id=id).values('id','name','email','phone'))
+        profile=list(clinicprofile.objects.filter(id=id).values('id','name','email','phone'))
         return render(request,'Clinic_profile.html',{'profile':profile,'title':"Profile"})
 
 
 @login_required(login_url='/login/')
 @user_passes_test(role_test,login_url='/login/')
 def Clinic_edit(request,id):
-    profile=list(Clinic_profile.objects.filter(id=id).values('name','email','phone'))
+    profile=list(clinicprofile.objects.filter(id=id).values('name','email','phone'))
     if request.method == 'POST':
         Clinic_name=request.POST.get('Clinic_name')
         email=request.POST.get('hos_email')
         phone=request.POST.get('hos_phone')
-        filter_obj=Clinic_profile.objects.filter(id=id)
+        filter_obj=clinicprofile.objects.filter(id=id)
         if not filter_obj:
-            obj=Clinic_profile.objects.create(id=id,name=Clinic_name,email=email,phone=phone)
+            obj=clinicprofile.objects.create(id=id,name=Clinic_name,email=email,phone=phone)
             obj.save()
             messages.success(request,'success')
             return redirect(f'/Clinic/{id}/')
         else:
-            edit_obj=Clinic_profile.objects.get(id=id)
+            edit_obj=clinicprofile.objects.get(id=id)
             edit_obj.name=Clinic_name
             edit_obj.email=email
             edit_obj.phone=phone
@@ -62,7 +62,7 @@ def Clinic_edit(request,id):
 
 def listClinic(request):
     if request.is_ajax():
-        obj=list(Clinic_profile.objects.all().values())
+        obj=list(clinicprofile.objects.all().values())
         return JsonResponse(obj,safe=False)
 
 

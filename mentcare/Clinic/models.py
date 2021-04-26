@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Clinic_profile(models.Model):
+class clinicprofile(models.Model):
      id=models.UUIDField( primary_key = True, editable = False)
      name=models.CharField(max_length=100)
      email=models.CharField(max_length=100)
