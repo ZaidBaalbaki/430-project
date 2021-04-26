@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+MEDIA_ROOT = "C:/Users/zaidb/Desktop/430 project/mentcare/media"
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,11 +47,10 @@ INSTALLED_APPS = [
 ]
 AUTH_USER_MODEL='user.CustomUser'
 EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend' 
-EMAIL_HOST = 'mail.webzone.dev' 
-EMAIL_USE_TLS = True 
-EMAIL_PORT = 465 
-EMAIL_HOST_USER = 'test@webzone.dev' 
-EMAIL_HOST_PASSWORD = 'Testtset123'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'dc8d77ed876803'
+EMAIL_HOST_PASSWORD = '6f2723303a0d41'
+EMAIL_PORT = '2525'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,6 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
