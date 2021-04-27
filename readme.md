@@ -1,12 +1,12 @@
 1. Clone this repository by downloading it or ``git clone https://github.com/ZaidBaalbaki/430-project.git ``
 2. Replace SMTP server details in settings.py file:-
 	
-	EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
-	EMAIL_HOST = 'smtp.your-host.com'
-	EMAIL_USE_TLS = True
-	EMAIL_PORT = 587
-	EMAIL_HOST_USER = 'user@your-host.com'
-	EMAIL_HOST_PASSWORD = 'your-password'
+	- EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+	- EMAIL_HOST = 'smtp.your-host.com'
+	- EMAIL_USE_TLS = True
+	- EMAIL_PORT = 587
+	- EMAIL_HOST_USER = 'user@your-host.com'
+	- EMAIL_HOST_PASSWORD = 'your-password'
 
 5. Run ``py manage.py makemigrations`` to create the migrations.
 6. Run ``py manage.py migrate`` to create the app models.
