@@ -103,7 +103,7 @@ def waiting_app(request,hos_id):
         temp_appointment_obj=[]
 
     else:
-        doc_obj=list(Doctor_profile.objects.filter(Clinic_id=Clinic_id).values('id'))
+        doc_obj=list(Doctor_profile.objects.filter(Clinic_id=hos_id).values('id'))
         for doc in doc_obj:
             if typ == 'confirm':
                 temp_appointment_obj=list(appointments.objects.filter(doctor_id=doc.get('id'),date=date,is_confirmed=False,is_rejected=False,is_disabled=False).values())
