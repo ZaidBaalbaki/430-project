@@ -1,6 +1,7 @@
 1. Clone this repository by downloading it or by ``git clone https://github.com/ZaidBaalbaki/430-project.git ``
-2. Replace SMTP server details in settings.py file:-
-	
+2. For the system to send emails, replace SMTP server details in settings.py file:-
+* You can use a testing email service like Mailtrap to replace the following code and catch the outgoing emails. 
+* This is a better option since most popular email services like Gmail might block automated emails.
 	- EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
 	- EMAIL_HOST = 'smtp.your-host.com'
 	- EMAIL_USE_TLS = True
